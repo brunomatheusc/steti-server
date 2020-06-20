@@ -6,6 +6,7 @@ import ensureAuthenticated from './../middlewares/ensureAuthenticated';
 const appointmentsRoutes = Router();
 
 appointmentsRoutes.use(ensureAuthenticated);
+
 appointmentsRoutes.get('/', AppointmentsController.read);
 appointmentsRoutes.post('/', AppointmentsController.create);
 
