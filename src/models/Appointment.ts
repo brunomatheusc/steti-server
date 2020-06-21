@@ -3,7 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 import User from './User';
 
 @Entity('appointments')
-class Appointment {
+export default class Appointment {
 	@PrimaryGeneratedColumn('uuid')
 	id: string;
 
@@ -23,5 +23,3 @@ class Appointment {
 	@UpdateDateColumn()
 	updated_at: Date;
 }
-
-export default Appointment;

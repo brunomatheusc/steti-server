@@ -1,25 +1,32 @@
 import { Request, Response } from 'express';
 import CreateUserService from '../services/CreateUserService';
+import UpdateUserAvatarService from './../services/UpdateUserAvatarService';
 
 class UsersController {
 	public async create(req: Request, res: Response) {
-		try {
-			const { name, email, password } = req.body;
+		const { name, email, password } = req.body;
 
-			const createUser = new CreateUserService();
+		const createUser = new CreateUserService();
 
-			const user = await createUser.execute({ name, email, password });
+		const user = await createUser.execute({ name, email, password });
 
-			delete user.password;
+		delete user.password;
 
-			return res.json({ user });
-		} catch (error) {
-			return res.status(400).json({ message: error.message });			
-		}
+		return res.json({ user });
 	}
 
 	public read(req: Request, res: Response) {
 
+	}
+
+	public async avatar(req: Request, res: Response) {
+		const updateUserAvatar = new UpdateUserAvatarService();
+
+		const user = await updateUserAvatar.execute({ userId: req.user.id, avatar: req.file.filename });
+
+		delete user.password;
+
+		return res.json({ user });
 	}
 }
 
